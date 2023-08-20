@@ -336,13 +336,13 @@ class MirrorLeechListener:
     async def onUploadComplete(self, link, size, files, folders, mime_type, name, rclonePath='', dir_id='', private=False):
         if self.isSuperGroup and config_dict['INCOMPLETE_TASK_NOTIFIER'] and DATABASE_URL:
             await DbManger().rm_complete_task(self.message.link)
-        msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{get_readable_file_size(size)}"
+        msg = f"<b>🌹 Name: </b><code>{escape(name)}</code>\n\n<b>❈ Size: </b>{get_readable_file_size(size)}"
         LOGGER.info(f'Task Done: {name}')
         if self.isLeech:
-            msg += f'\n<b>Total Files: </b>{folders}'
+            msg += f'\n<b>❈ Total Files: </b>{folders}'
             if mime_type != 0:
-                msg += f'\n<b>Corrupted Files: </b>{mime_type}'
-            msg += f'\n<b>cc: </b>{self.tag}\n\n'
+                msg += f'\n<b>❈ Corrupted Files: </b>{mime_type}'
+            msg += f'\n<b>❈ cc: </b>{self.tag}\n\n'
             if not files:
                 await sendMessage(self.message, msg)
             else:
@@ -364,14 +364,14 @@ class MirrorLeechListener:
                 await start_from_queued()
                 return
         else:
-            msg += f'\n\n<b>Type: </b>{mime_type}'
+            msg += f'\n\n<b>❈ Type: </b>{mime_type}'
             if mime_type == "Folder":
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>❈ SubFolders: </b>{folders}'
+                msg += f'\n<b>❈ Files: </b>{files}'
             if link or rclonePath and config_dict['RCLONE_SERVE_URL']:
                 buttons = ButtonMaker()
                 if link:
-                    buttons.ubutton("☁️ Cloud Link", link)
+                    buttons.ubutton("🍓 Cloud Link", link)
                 else:
                     msg += f'\n\nPath: <code>{rclonePath}</code>'
                 if rclonePath and (RCLONE_SERVE_URL := config_dict['RCLONE_SERVE_URL']) and not private:
@@ -389,15 +389,15 @@ class MirrorLeechListener:
                         INDEX_URL = config_dict['INDEX_URL']
                     if INDEX_URL:
                         share_url = f'{INDEX_URL}findpath?id={dir_id}'
-                        buttons.ubutton("⚡ Index Link", share_url)
+                        buttons.ubutton("🍓 Index Link", share_url)
                         if mime_type.startswith(('image', 'video', 'audio')):
                             share_urls = f'{INDEX_URL}findpath?id={dir_id}&view=true'
-                            buttons.ubutton("🌐 View Link", share_urls)
+                            buttons.ubutton("🍓 View Link", share_urls)
                 button = buttons.build_menu(2)
             else:
                 msg += f'\n\nPath: <code>{rclonePath}</code>'
                 button = None
-            msg += f'\n\n<b>cc: </b>{self.tag}'
+            msg += f'\n\n<b>❈ cc: </b>{self.tag}'
             await sendMessage(self.message, msg, button)
             if self.seed:
                 if self.newDir:
