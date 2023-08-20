@@ -31,7 +31,7 @@ async def stats(_, message):
     total, used, free, disk = disk_usage('/')
     swap = swap_memory()
     memory = virtual_memory()
-    stats = f'<b>Commit Date:</b> {last_commit}\n\n'\
+    stats = f'<b>❖ 𝐖𝐃 𝐙𝐎𝐍𝐄 ❖ ™</b> {last_commit}\n\n'\
             f'<b>Bot Uptime:</b> {get_readable_time(time() - botStartTime)}\n'\
             f'<b>OS Uptime:</b> {get_readable_time(time() - boot_time())}\n\n'\
             f'<b>Total Disk Space:</b> {get_readable_file_size(total)}\n'\
@@ -53,12 +53,12 @@ async def stats(_, message):
 async def start(client, message):
     buttons = ButtonMaker()
     buttons.ubutton(
-        "Repo", "https://www.github.com/anasty17/mirror-leech-telegram-bot")
-    buttons.ubutton("Owner", "https://t.me/anas_tayyar")
+        "❖ 𝐖𝐃 𝐙𝐎𝐍𝐄 ❖", "https://t.me/Opleech")
+    buttons.ubutton("𝐖𝐎𝐎𝐃𝐜𝐫𝐚𝐟𝐭⁪⁬", "https://t.me/Farooq_is_KING")
     reply_markup = buttons.build_menu(2)
     if await CustomFilters.authorized(client, message):
         start_string = f'''
-This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.
+✤◄ 𝐖𝐎𝐎𝐃𝐜𝐫𝐚𝐟𝐭 ►✤ Bot is ✔️Ready.
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         await sendMessage(message, start_string, reply_markup)
